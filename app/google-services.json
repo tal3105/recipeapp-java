@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "466657321887",
+    "project_id": "recipeprojectjava",
+    "storage_bucket": "recipeprojectjava.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:466657321887:android:50faedab9854b60d8053aa",
+        "android_client_info": {
+          "package_name": "com.example.amit_mitzmacher_tal_mitzmacher"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAxxJK5WVGOLOwO6xMlqs3tqed58wELRiA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
