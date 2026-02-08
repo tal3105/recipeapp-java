@@ -129,8 +129,16 @@ public class RecipeDetailsFragment extends Fragment {
         if (ingredientsList != null && !ingredientsList.isEmpty()) {
             binding.layoutIngredientsContainer.setVisibility(View.VISIBLE);
             for (Recipe.ExtendedIngredient ing : ingredientsList) {
-                TranslationHelper.translate(ing.getOriginal(), translated -> {
-                    if (binding != null) binding.tvDetailsIngredients.append("• " + translated + "\n");
+
+                // בניית הטקסט: כמות + שם (למשל: "2 cups Flour")
+                // השתמש ב-getName() וב-getMeasure() כפי שהגדרנו ב-Recipe
+                String measure = (ing.getMeasure() != null) ? ing.getMeasure() : "";
+                String fullIngredientText = measure + " " + ing.getOriginal();
+
+                TranslationHelper.translate(fullIngredientText.trim(), translated -> {
+                    if (binding != null) {
+                        binding.tvDetailsIngredients.append("• " + translated + "\n");
+                    }
                 });
             }
         } else if (recipe.getIngredients() != null && !recipe.getIngredients().trim().isEmpty()) {
