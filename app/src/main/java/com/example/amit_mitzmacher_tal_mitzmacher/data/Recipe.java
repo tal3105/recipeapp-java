@@ -96,7 +96,17 @@ public class Recipe {
                     strIngredient1, strIngredient2, strIngredient3, strIngredient4, strIngredient5,
                     strIngredient6, strIngredient7, strIngredient8, strIngredient9, strIngredient10
             };
-            for (String ing : apiIngredients) {
+
+            // מערך מקביל של כמויות
+            String[] apiMeasures = {
+                    strMeasure1, strMeasure2, strMeasure3, strMeasure4, strMeasure5,
+                    strMeasure6, strMeasure7, strMeasure8, strMeasure9, strMeasure10
+            };
+
+            for (int i = 0; i < apiIngredients.length; i++) {
+                String ing = apiIngredients[i];
+                String measure = apiMeasures[i];
+
                 if (ing != null && !ing.trim().isEmpty()) {
                     extendedIngredients.add(new ExtendedIngredient(ing));
                 }
