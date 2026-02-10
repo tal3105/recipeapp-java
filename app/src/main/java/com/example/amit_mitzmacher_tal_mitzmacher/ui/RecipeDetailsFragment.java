@@ -183,10 +183,6 @@ public class RecipeDetailsFragment extends Fragment {
         });
         binding.btnDeleteRecipe.setOnClickListener(v -> {
             new AlertDialog.Builder(requireContext())
-                    .setTitle(getString(R.string.delete_recipe_title))
-                    .setMessage(getString(R.string.delete_confirmation_msg))
-                    .setPositiveButton(getString(R.string.yes), (dialog, which) -> deleteRecipe())
-                    .setNegativeButton(getString(R.string.cancel), null)
                     .show();
         });
     }
@@ -194,7 +190,6 @@ public class RecipeDetailsFragment extends Fragment {
     private void deleteRecipe() {
         if (currentRecipe != null) {
             recipeViewModel.delete(currentRecipe);
-            Toast.makeText(getContext(), getString(R.string.success_delete), Toast.LENGTH_SHORT).show();
             Navigation.findNavController(requireView()).popBackStack();
         }
     }

@@ -1,8 +1,11 @@
 <resources>
     <string name="app_name" translatable="false">My Recipe Book</string>
 
+<<<<<<< HEAD
     <string name="tvNoRecipes">No recipes found yet</string>
 
+=======
+>>>>>>> d5c6860ed25c87fa55c0c3d03a0613ad37fdc9e1
     <string name="add_recipe_header" translatable="false">Add New Recipe</string>
     <string name="hint_recipe_name" translatable="false">Recipe Name</string>
     <string name="hint_category" translatable="false">Category</string>
@@ -11,8 +14,11 @@
     <string name="btn_capture" translatable="false">Capture Recipe Image</string>
     <string name="btn_save" translatable="false">Save Recipe</string>
     <string name="tap_image_to_enlarge" translatable="false">TAP IMAGE TO ENLARGE</string>
+<<<<<<< HEAD
     <string name="btnModeText">Manual Typing</string>
     <string name="btnModeImage">Photo Recipe</string>
+=======
+>>>>>>> d5c6860ed25c87fa55c0c3d03a0613ad37fdc9e1
 
     <string name="error_title_required" translatable="false">Please fill in title and ingredients</string>-->
     <string name="success_save" translatable="false">Recipe saved</string>
@@ -82,11 +88,17 @@
     <string name="register_back_to_login">Already have an account? Login</string>
     <string name="register_success">Registered successfully</string>
 
+<<<<<<< HEAD
     <string name="ExitApp">Exit From The App</string>
     <string name="ExitAppAlert">Are You Sure You Want To Close The App</string>
     <string name="ExitAppCancel">Cancel</string>
     <string name="ExitAppOut">Get Out</string>
 
 
+=======
+    <string name="tvNoRecipes">No recipes found yet, enter + to add</string>
+    <string name="btnModeText">Manual Typing</string>
+    <string name="btnModeImage">Photo Recipe</string>
+>>>>>>> d5c6860ed25c87fa55c0c3d03a0613ad37fdc9e1
 
 </resources>

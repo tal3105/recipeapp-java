@@ -10,10 +10,13 @@
     <string name="btn_capture">צילום תמונת מתכון</string>
     <string name="btn_save">שמירת מתכון</string>
     <string name="tap_image_to_enlarge">לחץ על התמונה להגדלה</string>
+<<<<<<< HEAD
     <string name="btnModeText">הקלדה ידנית</string>
     <string name="btnModeImage">תמונה</string>
 
     <string name="tvNoRecipes">אין עדיין מתכונים</string>
+=======
+>>>>>>> d5c6860ed25c87fa55c0c3d03a0613ad37fdc9e1
 
     <string name="error_title_required">אנא מלאי כותרת ומצרכים</string>-->
     <string name="success_save">המתכון נשמר</string>
@@ -22,7 +25,11 @@
     <string name="recipe_saved_success">המתכון נשמר בהצלחה</string>
     <string name="updated">המתכון עודכן</string>
 
+<<<<<<< HEAD
     <string name="searchView">חיפוש לפי מצרכים</string>
+=======
+    <string name="searchView">חיפוש אונליין לפי מצרכים</string>
+>>>>>>> d5c6860ed25c87fa55c0c3d03a0613ad37fdc9e1
     <string name="no_results_found">לא נמצאו מתכונים אונליין.</string>
     <string name="error_network">שגיאת רשת: </string>
     <string name="history_empty">היסטוריית החיפוש ריקה.</string>
@@ -82,10 +89,16 @@
     <string name="register_back_to_login">כבר יש לך חשבון? להתחברות</string>
     <string name="register_success">נרשמת בהצלחה</string>
 
+<<<<<<< HEAD
     <string name="ExitApp">יציאה מהאפליקציה</string>
     <string name="ExitAppAlert">אתה בטוח שברצונך לסגור את האפליקציה?</string>
     <string name="ExitAppCancel">ביטול</string>
     <string name="ExitAppOut">צא</string>
 
+=======
+    <string name="tvNoRecipes">אין עדיין מתכונים, הקלד + להוספה</string>
+    <string name="btnModeText">הקלדה ידנית</string>
+    <string name="btnModeImage">תמונת מתכון</string>
+>>>>>>> d5c6860ed25c87fa55c0c3d03a0613ad37fdc9e1
 
 </resources>

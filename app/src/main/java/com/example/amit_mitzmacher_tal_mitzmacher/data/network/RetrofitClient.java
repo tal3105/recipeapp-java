@@ -14,7 +14,11 @@ public class RetrofitClient {
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }
+<<<<<<< HEAD
         // התיקון כאן: משתמשים ב-create ולא ב-getItem
+=======
+
+>>>>>>> d5c6860ed25c87fa55c0c3d03a0613ad37fdc9e1
         return retrofit.create(RecipeService.class);
     }
 }
