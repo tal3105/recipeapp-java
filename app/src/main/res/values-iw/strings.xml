@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ספר המתכונים שלי</string>
+
+    <string name="add_recipe_header">הוספת מתכון חדש</string>
+    <string name="hint_recipe_name">שם המתכון</string>
+    <string name="hint_category">קטגוריה</string>
+    <string name="hint_ingredients">מצרכים</string>
+    <string name="hint_instructions">הוראות הכנה</string>
+    <string name="btn_capture">צילום תמונת מתכון</string>
+    <string name="btn_save">שמירת מתכון</string>
+    <string name="tap_image_to_enlarge">לחץ על התמונה להגדלה</string>
+    <string name="btnModeText">הקלדה ידנית</string>
+    <string name="btnModeImage">תמונה</string>
+
+    <string name="tvNoRecipes">אין עדיין מתכונים</string>
+
+    <string name="error_title_required">אנא מלאי כותרת ומצרכים</string>-->
+    <string name="success_save">המתכון נשמר</string>
+    <string name="added">נוסף לרשימה</string>
+    <string name="fill_fields_error">אנא מלאי את הכותרת והמצרכים</string>
+    <string name="recipe_saved_success">המתכון נשמר בהצלחה</string>
+    <string name="updated">המתכון עודכן</string>
+
+    <string name="searchView">חיפוש לפי מצרכים</string>
+    <string name="no_results_found">לא נמצאו מתכונים אונליין.</string>
+    <string name="error_network">שגיאת רשת: </string>
+    <string name="history_empty">היסטוריית החיפוש ריקה.</string>
+    <string name="recent_searches_title">חיפושים אחרונים:</string>
+    <string name="search_error">החיפוש נכשל</string>
+
+    <string name="remove_photo">הסרת תמונה</string>
+    <string name="btnDeleteRecipe">מחיקת מתכון</string>
+    <string name="delete_recipe_title">מחיקת מתכון</string>
+    <string name="delete_confirmation_msg">האם את בטוחה שברצונך למחוק את המתכון הזה?</string>
+    <string name="yes">כן, מחק</string>
+    <string name="cancel">ביטול</string>
+    <string name="success_delete">המתכון נמחק</string>
+
+    <string name="permission_required">נדרשת הרשאת מצלמה כדי לצלם תמונות</string>
+    <string name="camera_error">לא ניתן לפתוח את המצלמה</string>
+    <string name="no_camera_app">לא נמצאה אפליקציית מצלמה במכשיר זה</string>
+    <string name="add_photo_title">הוספת תמונה</string>
+    <string name="camera">מצלמה</string>
+    <string name="gallery">גלריה</string>
+    <string name="choose_from_gallery">בחירה מגלריה</string>
+    <string name="gallery_error">טעינת התמונה מהגלריה נכשלה</string>
+    <string name="capture_recipe_page">צילום דף מתכון</string>
+
+    <string name="chipAll">הכל</string>
+    <string name="chipFavorite">מועדפים ⭐</string>
+    <string name="chipHistory">היסטוריה 🕒</string>
+
+    <string-array name="recipe_categories">
+        <item>בחר קטגוריה</item>
+        <item>בשרי</item>
+        <item>חלבי</item>
+        <item>פרווה</item>
+        <item>קינוחים</item>
+        <item>טבעוני</item>
+        <item>דגים</item>
+    </string-array>
+
+    <string name="error_category_required">חובה לבחור קטגוריה</string>
+
+    <string name="added_to_favorites">נוסף למועדפים</string>
+    <string name="removed_from_favorites">הוסר מהמועדפים</string>
+
+    <string name="login_welcome">ברוכים הבאים</string>
+    <string name="login_email_hint">אימייל</string>
+    <string name="login_password_hint">סיסמה</string>
+    <string name="login_button">התחברות</string>
+    <string name="error_empty_fields">נא למלא את כל השדות</string>-->
+    <string name="login_success">התחברת בהצלחה!</string>
+    <string name="login_go_to_register">עדיין אין לך חשבון? להרשמה לחץ כאן</string>
+    <string name="error_prefix">שגיאה: </string>
+    <string name="error_unknown">אירעה שגיאה לא ידועה</string>
+
+    <string name="register_title">יצירת חשבון</string>
+    <string name="register_name_hint">שם מלא</string>
+    <string name="register_button">הרשמה</string>
+    <string name="register_back_to_login">כבר יש לך חשבון? להתחברות</string>
+    <string name="register_success">נרשמת בהצלחה</string>
+
+    <string name="ExitApp">יציאה מהאפליקציה</string>
+    <string name="ExitAppAlert">אתה בטוח שברצונך לסגור את האפליקציה?</string>
+    <string name="ExitAppCancel">ביטול</string>
+    <string name="ExitAppOut">צא</string>
+
+
+</resources>

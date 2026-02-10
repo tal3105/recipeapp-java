@@ -1,0 +1,92 @@
+<resources>
+    <string name="app_name" translatable="false">My Recipe Book</string>
+
+    <string name="tvNoRecipes">No recipes found yet</string>
+
+    <string name="add_recipe_header" translatable="false">Add New Recipe</string>
+    <string name="hint_recipe_name" translatable="false">Recipe Name</string>
+    <string name="hint_category" translatable="false">Category</string>
+    <string name="hint_ingredients" translatable="false">Ingredients</string>
+    <string name="hint_instructions" translatable="false">Preparation Instructions</string>
+    <string name="btn_capture" translatable="false">Capture Recipe Image</string>
+    <string name="btn_save" translatable="false">Save Recipe</string>
+    <string name="tap_image_to_enlarge" translatable="false">TAP IMAGE TO ENLARGE</string>
+    <string name="btnModeText">Manual Typing</string>
+    <string name="btnModeImage">Photo Recipe</string>
+
+    <string name="error_title_required" translatable="false">Please fill in title and ingredients</string>-->
+    <string name="success_save" translatable="false">Recipe saved</string>
+    <string name="added" translatable="false">Added to the list</string>
+    <string name="fill_fields_error" translatable="false">Please fill in the title and ingredients</string>
+    <string name="recipe_saved_success" translatable="false">Recipe saved</string>
+    <string name="updated" translatable="false">Recipe updated</string>
+
+    <string name="searchView" translatable="false">Search online by ingredients</string>
+    <string name="no_results_found" translatable="false">No recipes found online.</string>
+    <string name="error_network" translatable="false">Network error: </string>
+    <string name="history_empty" translatable="false">Search history is empty.</string>
+    <string name="recent_searches_title" translatable="false">Recent Searches:</string>
+    <string name="search_error" translatable="false">Failed to perform search</string>
+
+    <string name="remove_photo" translatable="false">Remove Photo</string>
+    <string name="btnDeleteRecipe" translatable="false">Delete Recipe</string>
+    <string name="delete_recipe_title" translatable="false">Delete Recipe</string>
+    <string name="delete_confirmation_msg" translatable="false">Are you sure you want to delete this recipe?</string>
+    <string name="yes" translatable="false">Yes, Delete</string>
+    <string name="cancel" translatable="false">Cancel</string>
+    <string name="success_delete" translatable="false">Recipe deleted</string>
+
+    <string name="permission_required" translatable="false">Camera permission is required to take photos</string>
+    <string name="camera_error" translatable="false">Cannot open camera</string>
+    <string name="no_camera_app" translatable="false">No camera app found on this device</string>
+    <string name="add_photo_title" translatable="false">Add Photo</string>
+    <string name="camera" translatable="false">Camera</string>
+    <string name="gallery" translatable="false">Gallery</string>
+    <string name="choose_from_gallery" translatable="false">Choose from Gallery</string>
+    <string name="gallery_error" translatable="false">Failed to load image from gallery</string>
+    <string name="capture_recipe_page" translatable="false">CAPTURE RECIPE PAGE</string>
+
+    <string name="chipAll" translatable="false">All</string>
+    <string name="chipFavorite" translatable="false">Favorite ⭐</string>
+    <string name="chipHistory" translatable="false">History 🕒</string>
+
+
+    <string-array name="recipe_categories">
+        <item>Choose Category</item>
+        <item>Meat</item>
+        <item>Dairy</item>
+        <item>Parve</item>
+        <item>Desserts</item>
+        <item>Vegan</item>
+        <item>Fish</item>
+    </string-array>
+
+    <string name="error_category_required" translatable="false">You must choose a category</string>
+
+    <string name="added_to_favorites" translatable="false">Added to Favorites</string>
+    <string name="removed_from_favorites" translatable="false">Removed from Favorites</string>
+
+    <string name="login_welcome">Welcome</string>
+    <string name="login_email_hint">Email</string>
+    <string name="login_password_hint">Password</string>
+    <string name="login_button">Login</string>
+    <string name="error_empty_fields">Please fill all fields</string>-->
+    <string name="login_success">Logged in successfully!</string>
+    <string name="login_go_to_register">Don\'t have an account? Register here</string>
+    <string name="error_prefix">Error: </string>
+    <string name="error_unknown">An unknown error occurred</string>
+
+    <string name="register_title">Create Account</string>
+    <string name="register_name_hint">Full Name</string>
+    <string name="register_button">Register</string>
+    <string name="register_back_to_login">Already have an account? Login</string>
+    <string name="register_success">Registered successfully</string>
+
+    <string name="ExitApp">Exit From The App</string>
+    <string name="ExitAppAlert">Are You Sure You Want To Close The App</string>
+    <string name="ExitAppCancel">Cancel</string>
+    <string name="ExitAppOut">Get Out</string>
+
+
+
+</resources>
