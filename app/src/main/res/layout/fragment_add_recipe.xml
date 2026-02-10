@@ -76,13 +76,13 @@
                 style="?attr/materialButtonOutlinedStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Manual Typing" />
+                android:text="@string/btnModeText" />
             <Button
                 android:id="@+id/btnModeImage"
                 style="?attr/materialButtonOutlinedStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Photo Recipe" />
+                android:text="@string/btnModeImage" />
         </com.google.android.material.button.MaterialButtonToggleGroup>
 
         <LinearLayout

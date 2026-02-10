@@ -78,6 +78,8 @@
     <string name="register_back_to_login">כבר יש לך חשבון? להתחברות</string>
     <string name="register_success">נרשמת בהצלחה</string>
 
-    <string name="tvNoRecipes">אין עדיין מתכונים</string>
+    <string name="tvNoRecipes">אין עדיין מתכונים, הקלד + להוספה</string>
+    <string name="btnModeText">הקלדה ידנית</string>
+    <string name="btnModeImage">Photo Recipe</string>
 
 </resources>

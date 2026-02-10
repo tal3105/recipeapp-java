@@ -78,6 +78,8 @@
     <string name="register_back_to_login">Already have an account? Login</string>
     <string name="register_success">Registered successfully</string>
 
-    <string name="tvNoRecipes">No recipes found yet</string>
+    <string name="tvNoRecipes">No recipes found yet, enter + to add</string>
+    <string name="btnModeText">Manual Typing</string>
+    <string name="btnModeImage">Photo Recipe</string>
 
 </resources>

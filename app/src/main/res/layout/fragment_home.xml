@@ -107,7 +107,7 @@
         android:id="@+id/tvNoRecipes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="No recipes found yet"
+        android:text="@string/tvNoRecipes"
         android:textSize="18sp"
         android:textColor="#999999"
         android:visibility="gone"

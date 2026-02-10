@@ -46,6 +46,18 @@ public class Recipe {
     @Ignore @SerializedName("strIngredient9") private String strIngredient9;
     @Ignore @SerializedName("strIngredient10") private String strIngredient10;
 
+    // שדות הכמויות מה-API - גם הם ב-@Ignore כי לא שומרים אותם בנפרד ב-DB
+    @Ignore @SerializedName("strMeasure1") private String strMeasure1;
+    @Ignore @SerializedName("strMeasure2") private String strMeasure2;
+    @Ignore @SerializedName("strMeasure3") private String strMeasure3;
+    @Ignore @SerializedName("strMeasure4") private String strMeasure4;
+    @Ignore @SerializedName("strMeasure5") private String strMeasure5;
+    @Ignore @SerializedName("strMeasure6") private String strMeasure6;
+    @Ignore @SerializedName("strMeasure7") private String strMeasure7;
+    @Ignore @SerializedName("strMeasure8") private String strMeasure8;
+    @Ignore @SerializedName("strMeasure9") private String strMeasure9;
+    @Ignore @SerializedName("strMeasure10") private String strMeasure10;
+
     @Ignore
     private List<ExtendedIngredient> extendedIngredients;
 
@@ -92,6 +104,8 @@ public class Recipe {
     public List<ExtendedIngredient> getExtendedIngredients() {
         if (extendedIngredients == null) {
             extendedIngredients = new ArrayList<>();
+
+            // מערך של מרכיבים
             String[] apiIngredients = {
                     strIngredient1, strIngredient2, strIngredient3, strIngredient4, strIngredient5,
                     strIngredient6, strIngredient7, strIngredient8, strIngredient9, strIngredient10
@@ -108,7 +122,8 @@ public class Recipe {
                 String measure = apiMeasures[i];
 
                 if (ing != null && !ing.trim().isEmpty()) {
-                    extendedIngredients.add(new ExtendedIngredient(ing));
+                    // שומרים את שניהם יחד באובייקט אחד
+                    extendedIngredients.add(new ExtendedIngredient(ing, measure));
                 }
             }
         }
@@ -120,10 +135,21 @@ public class Recipe {
     }
 
     public static class ExtendedIngredient {
-        @SerializedName("original")
-        private String original;
-        public ExtendedIngredient(String original) { this.original = original; }
-        public String getOriginal() { return original; }
-        public void setOriginal(String original) { this.original = original; }
+        private String name;
+        private String measure;
+
+        public ExtendedIngredient(String name, String measure) {
+            this.name = name;
+            this.measure = measure;
+        }
+
+        // פונקציה נוחה שתחזיר לנו טקסט מעוצב כמו "1kg Chicken"
+        public String getFullText() {
+            if (measure == null || measure.trim().isEmpty()) return name;
+            return measure.trim() + " " + name;
+        }
+
+        public String getOriginal() { return name; }
+        public String getMeasure() { return measure; }
     }
 }

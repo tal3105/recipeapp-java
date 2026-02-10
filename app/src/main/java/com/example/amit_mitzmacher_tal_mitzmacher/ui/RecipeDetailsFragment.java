@@ -142,6 +142,7 @@ public class RecipeDetailsFragment extends Fragment {
                 });
             }
         } else if (recipe.getIngredients() != null && !recipe.getIngredients().trim().isEmpty()) {
+            // טיפול במקרה של טקסט חופשי (מתכונים שהמשתמש הזין ידנית)
             TranslationHelper.translate(recipe.getIngredients(), translated -> {
                 if (binding != null) {
                     binding.layoutIngredientsContainer.setVisibility(View.VISIBLE);
