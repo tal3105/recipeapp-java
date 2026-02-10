@@ -80,6 +80,6 @@
 
     <string name="tvNoRecipes">אין עדיין מתכונים, הקלד + להוספה</string>
     <string name="btnModeText">הקלדה ידנית</string>
-    <string name="btnModeImage">Photo Recipe</string>
+    <string name="btnModeImage">תמונת מתכון</string>
 
 </resources>
