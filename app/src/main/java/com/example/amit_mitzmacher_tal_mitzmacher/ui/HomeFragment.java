@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
@@ -42,6 +44,19 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                new androidx.appcompat.app.AlertDialog.Builder(requireContext())
+                        .setTitle(getString(R.string.ExitApp))
+                        .setMessage(getString(R.string.ExitAppAlert))
+                        .setNegativeButton(getString(R.string.ExitAppCancel), (dialog, which) -> dialog.dismiss())
+                        .setPositiveButton(getString(R.string.ExitAppOut), (dialog, which) -> requireActivity().finish())
+                        .create()
+                        .show();
+            }
+        });
 
         setupRecyclerView();
         setupCategoryFilters();
