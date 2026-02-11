@@ -13,24 +13,19 @@ import java.util.List;
 
 public class RecipeViewModel extends AndroidViewModel {
     private final RecipeRepository repository;
-
-    // רשימת המתכונים המוצגת כרגע (בבית, בחיפוש או במועדפים)
     private final MutableLiveData<List<Recipe>> currentRecipes = new MutableLiveData<>();
     private String lastSearchQuery = "";
 
     public RecipeViewModel(@NonNull Application application) {
         super(application);
         repository = new RecipeRepository(application);
-        // טעינה ראשונית של כל המתכונים של המשתמש המחובר
         loadAllRecipes();
     }
 
-    // פעולות בסיסיות - ה-Repository כבר דואג להוסיף את ה-userId
     public void insert(Recipe recipe) { repository.insert(recipe); }
     public void update(Recipe recipe) { repository.update(recipe); }
     public void delete(Recipe recipe) { repository.delete(recipe); }
 
-    // בדיקה אם מתכון API קיים אצל המשתמש
     public LiveData<Recipe> getRecipeByApiId(String apiId) {
         return repository.getRecipeByApiId(apiId);
     }
@@ -43,10 +38,8 @@ public class RecipeViewModel extends AndroidViewModel {
         return currentRecipes;
     }
 
-    // --- טעינה וסינון נתונים ---
 
     public void loadAllRecipes() {
-        // ה-Repository מחזיר רק מתכונים של המשתמש הנוכחי
         repository.getAllRecipes().observeForever(currentRecipes::setValue);
     }
 
@@ -79,7 +72,6 @@ public class RecipeViewModel extends AndroidViewModel {
         repository.upsert(recipe);
     }
 
-    // --- קטגוריות ופרטי API ---
 
     public LiveData<List<String>> getAllCategories() {
         return repository.getAllCategories();

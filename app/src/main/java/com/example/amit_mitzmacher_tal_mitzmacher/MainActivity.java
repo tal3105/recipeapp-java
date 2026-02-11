@@ -28,7 +28,6 @@ public class MainActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
     }
 
-    // פונקציית התחברות שמקבלת Runnable לביצוע ניווט בהצלחה
     public void login(String email, String password, Runnable onSuccess) {
         auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, task -> {
@@ -42,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
-    // פונקציית הרשמה שמקבלת Runnable לביצוע ניווט בהצלחה
     public void register(String email, String password, Runnable onSuccess) {
         auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, task -> {

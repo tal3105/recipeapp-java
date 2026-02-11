@@ -41,29 +41,25 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
     public void onBindViewHolder(@NonNull RecipeViewHolder holder, int position) {
         Recipe recipe = recipes.get(position);
 
-        // שמירת ה-ID הנוכחי על ה-View כדי למנוע בלבול בתרגום בזמן גלילה
+        // Saving the current ID to avoid translation confusion while scrolling
         holder.itemView.setTag(recipe.getTitle());
 
-        // טקסט זמני עד לסיום התרגום
-        holder.binding.tvRecipeTitle.setText("מתרגם...");
+
+        holder.binding.tvRecipeTitle.setText(R.string.translation);
         holder.binding.tvRecipeCategory.setText("...");
 
-        // תרגום כותרת המתכון
         TranslationHelper.translate(recipe.getTitle(), translatedTitle -> {
-            // בדיקה שהתא עדיין מציג את אותו מתכון (מניעת באגים בגלילה)
             if (holder.itemView.getTag().equals(recipe.getTitle())) {
                 holder.binding.tvRecipeTitle.setText(translatedTitle);
             }
         });
 
-        // תרגום הקטגוריה
         TranslationHelper.translate(recipe.getCategory(), translatedCategory -> {
             if (holder.itemView.getTag().equals(recipe.getTitle())) {
                 holder.binding.tvRecipeCategory.setText(translatedCategory);
             }
         });
 
-        // הצגת תמונה (API או Base64 מקומי)
         if (recipe.getImage() != null && !recipe.getImage().isEmpty()) {
             Glide.with(holder.itemView.getContext())
                     .load(recipe.getImage())
@@ -82,14 +78,12 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
             holder.binding.ivRecipeImage.setImageResource(R.drawable.placeholder_food);
         }
 
-        // ניהול אייקון המועדפים
         updateFavoriteIcon(holder.binding, recipe.isFavorite());
 
         holder.binding.btnFavorite.setOnClickListener(v -> {
             listener.onFavoriteClick(recipe);
         });
 
-        // לחיצה על כל הפריט למעבר לפרטים
         holder.itemView.setOnClickListener(v -> {
             listener.onItemClick(recipe);
         });

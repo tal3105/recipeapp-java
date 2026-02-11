@@ -8,7 +8,6 @@ import androidx.room.RoomDatabase;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-// שימי לב: הגרסה היא 3, וזה מצוין. אם הוספת שדות, זה יעדכן אותם.
 @Database(entities = {Recipe.class, SearchHistory.class}, version = 3)
 public abstract class AppDatabase extends RoomDatabase {
 
@@ -25,9 +24,7 @@ public abstract class AppDatabase extends RoomDatabase {
                 if (instance == null) {
                     instance = Room.databaseBuilder(context.getApplicationContext(),
                                     AppDatabase.class, "recipe_db")
-                            /* fallbackToDestructiveMigration ימנע את הקריסה שחווית.
-                               הוא מוחק את ה-DB הישן ויוצר חדש כשיש שינוי גרסה.
-                            */
+
                             .fallbackToDestructiveMigration()
                             .build();
                 }

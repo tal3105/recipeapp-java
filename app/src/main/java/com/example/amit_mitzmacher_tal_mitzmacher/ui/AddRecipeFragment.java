@@ -76,7 +76,6 @@ public class AddRecipeFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentAddRecipeBinding.inflate(inflater, container, false);
-        // חשוב: שימוש ב-requireActivity() כדי שה-ViewModel יהיה משותף לכל האפליקציה
         recipeViewModel = new ViewModelProvider(requireActivity()).get(RecipeViewModel.class);
         return binding.getRoot();
     }
@@ -143,21 +142,18 @@ public class AddRecipeFragment extends Fragment {
         String instructions = binding.etInstructions.getText().toString().trim();
         String imageStr = (capturedImage != null) ? bitmapToString(capturedImage) : "";
 
-        // קבלת ה-UID של המשתמש המחובר כרגע
         String currentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         if (recipeId == -1) {
-            // יצירת מתכון חדש עם ה-userId
             Recipe newRecipe = new Recipe(title, category, ingredients, instructions, imageStr, currentUserId);
             recipeViewModel.insert(newRecipe);
         } else {
-            // עדכון מתכון קיים
             existingRecipe.setTitle(title);
             existingRecipe.setCategory(category);
             existingRecipe.setIngredients(ingredients);
             existingRecipe.setInstructions(instructions);
             existingRecipe.setImagePath(imageStr);
-            existingRecipe.setUserId(currentUserId); // וידוא שה-ID נשמר בעדכון
+            existingRecipe.setUserId(currentUserId);
             recipeViewModel.update(existingRecipe);
         }
 

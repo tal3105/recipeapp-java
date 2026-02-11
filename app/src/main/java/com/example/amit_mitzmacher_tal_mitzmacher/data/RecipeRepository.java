@@ -26,13 +26,12 @@ public class RecipeRepository {
         executorService = Executors.newFixedThreadPool(4);
     }
 
-    // --- תיקון קריטי: הגנה מפני Null וערך ריק ---
     private String getCurrentUserId() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
             return user.getUid();
         }
-        return "GUEST"; // מחזירים ערך ברירת מחדל במקום "" כדי למנוע בעיות ב-Room
+        return "GUEST";
     }
 
     public void insert(Recipe recipe) {
@@ -60,10 +59,8 @@ public class RecipeRepository {
         });
     }
 
-    // --- שאילתות עם הגנה ---
     public LiveData<List<Recipe>> getAllRecipes() {
         String uid = getCurrentUserId();
-        // אם המשתמש עוד לא "מוכן", נחזיר רשימה ריקה זמנית כדי למנוע קריסה
         if (uid.equals("GUEST")) {
             return new MutableLiveData<>(new ArrayList<>());
         }
@@ -94,7 +91,6 @@ public class RecipeRepository {
         return recipeDao.getRecipeById(id);
     }
 
-    // --- API Methods ---
     public LiveData<List<Recipe>> searchRecipesApi(String query) {
         MutableLiveData<List<Recipe>> apiResults = new MutableLiveData<>();
         RetrofitClient.getRecipeService().searchRecipes(query)

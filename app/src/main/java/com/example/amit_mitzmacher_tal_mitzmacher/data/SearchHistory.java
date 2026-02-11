@@ -8,8 +8,8 @@ public class SearchHistory {
     @PrimaryKey(autoGenerate = true)
     public int id;
 
-    public String queryText; // המילה שחופשה
-    public long timestamp;   // מתי זה קרה (כדי למיין לפי החדש ביותר)
+    public String queryText;
+    public long timestamp;
 
     public SearchHistory(String queryText) {
         this.queryText = queryText;

@@ -14,49 +14,39 @@ public class TranslationHelper {
         void onTranslationComplete(String translatedText);
     }
 
-    // בדיקה האם המכשיר בעברית
     public static boolean isDeviceInHebrew() {
         String lang = Locale.getDefault().getLanguage();
         return lang.equals("iw") || lang.equals("he");
     }
 
-    /**
-     * פונקציית תרגום חכמה:
-     * מזהה את שפת המקור ומתרגמת לשפת המכשיר (עברית או אנגלית).
-     */
+    //detects the language and translates it
     public static void translate(String text, TranslationCallback callback) {
         if (text == null || text.trim().isEmpty()) {
             callback.onTranslationComplete("");
             return;
         }
 
-        // זיהוי שפת הטקסט שנשלח
         LanguageIdentifier languageIdentifier = LanguageIdentification.getClient();
         languageIdentifier.identifyLanguage(text)
                 .addOnSuccessListener(languageCode -> {
                     String targetLang = isDeviceInHebrew() ? TranslateLanguage.HEBREW : TranslateLanguage.ENGLISH;
 
-                    // אם השפה המזוהה כבר זהה לשפת היעד, אין צורך בתרגום
                     if (languageCode.equals(targetLang)) {
                         callback.onTranslationComplete(text);
                     } else {
-                        // אם הטקסט בעברית והיעד אנגלית, או להפך - נבצע תרגום
                         String sourceLang = targetLang.equals(TranslateLanguage.ENGLISH) ?
                                 TranslateLanguage.HEBREW : TranslateLanguage.ENGLISH;
                         performTranslation(text, sourceLang, targetLang, callback);
                     }
                 })
                 .addOnFailureListener(e -> {
-                    // במקרה של כישלון בזיהוי, ננסה תרגום ברירת מחדל לפי שפת המכשיר
                     String source = isDeviceInHebrew() ? TranslateLanguage.ENGLISH : TranslateLanguage.HEBREW;
                     String target = isDeviceInHebrew() ? TranslateLanguage.HEBREW : TranslateLanguage.ENGLISH;
                     performTranslation(text, source, target, callback);
                 });
     }
 
-    /**
-     * תרגום ספציפי לאנגלית (משמש לחיפוש ב-API)
-     */
+
     public static void translateToEnglish(String text, TranslationCallback callback) {
         if (text == null || text.trim().isEmpty()) {
             callback.onTranslationComplete("");

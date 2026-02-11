@@ -76,27 +76,23 @@ public class RecipeDetailsFragment extends Fragment {
                 });
             } else {
                 binding.progressBar.setVisibility(View.GONE);
-                Toast.makeText(getContext(), "שגיאה בטעינת הנתונים", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), getText(R.string.ErorLoad), Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     private void displayRecipe(Recipe recipe, boolean isFromApi, Recipe apiFallback) {
-        // 1. כותרת - תרגום אוטומטי
         TranslationHelper.translate(recipe.getTitle(), translated -> {
             if (binding != null) binding.tvDetailsTitle.setText(translated);
         });
 
-        // 2. קטגוריה - הצגת הקטגוריה המקורית ותרגומה (בלי צורך ב-strings.xml)
         String cat = (recipe.getCategory() != null) ? recipe.getCategory() : (isFromApi ? "Web" : "General");
         TranslationHelper.translate(cat, translated -> {
             if (binding != null) binding.tvDetailsCategory.setText(translated);
         });
 
-        // 3. מצרכים
         setupIngredientsDisplay(recipe, apiFallback);
 
-        // 4. הוראות הכנה
         String instructions = recipe.getInstructions();
         if ((instructions == null || instructions.trim().isEmpty()) && apiFallback != null) {
             instructions = apiFallback.getInstructions();
@@ -113,7 +109,6 @@ public class RecipeDetailsFragment extends Fragment {
 
         handleImageDisplay(recipe, isFromApi);
 
-        // שליטה בכפתורים
         binding.wrapperEdit.setVisibility(isFromApi ? View.GONE : View.VISIBLE);
         binding.wrapperDelete.setVisibility(recipe.getId() > 0 ? View.VISIBLE : View.GONE);
     }
@@ -124,14 +119,12 @@ public class RecipeDetailsFragment extends Fragment {
             ingredientsList = apiFallback.getExtendedIngredients();
         }
 
-        binding.tvDetailsIngredients.setText(""); // איפוס הטקסט
+        binding.tvDetailsIngredients.setText("");
 
         if (ingredientsList != null && !ingredientsList.isEmpty()) {
             binding.layoutIngredientsContainer.setVisibility(View.VISIBLE);
             for (Recipe.ExtendedIngredient ing : ingredientsList) {
 
-                // בניית הטקסט: כמות + שם (למשל: "2 cups Flour")
-                // השתמש ב-getName() וב-getMeasure() כפי שהגדרנו ב-Recipe
                 String measure = (ing.getMeasure() != null) ? ing.getMeasure() : "";
                 String fullIngredientText = measure + " " + ing.getOriginal();
 
@@ -142,7 +135,6 @@ public class RecipeDetailsFragment extends Fragment {
                 });
             }
         } else if (recipe.getIngredients() != null && !recipe.getIngredients().trim().isEmpty()) {
-            // טיפול במקרה של טקסט חופשי (מתכונים שהמשתמש הזין ידנית)
             TranslationHelper.translate(recipe.getIngredients(), translated -> {
                 if (binding != null) {
                     binding.layoutIngredientsContainer.setVisibility(View.VISIBLE);

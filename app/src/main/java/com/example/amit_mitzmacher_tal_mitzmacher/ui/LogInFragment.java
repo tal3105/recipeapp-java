@@ -38,7 +38,6 @@ public class LogInFragment extends Fragment {
                 MainActivity activity = (MainActivity) getActivity();
                 if (activity != null) {
                     activity.login(email, password, () -> {
-                        // ניווט לאחר התחברות מוצלחת
                         Navigation.findNavController(view).navigate(R.id.action_logInFragment_to_homeFragment);
                     });
                 }

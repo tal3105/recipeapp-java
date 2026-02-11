@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">ספר המתכונים שלי</string>
+    <string name="app_name">שף בבית</string>
 
     <string name="add_recipe_header">הוספת מתכון חדש</string>
     <string name="hint_recipe_name">שם המתכון</string>
@@ -10,7 +10,7 @@
     <string name="btn_capture">צילום תמונת מתכון</string>
     <string name="btn_save">שמירת מתכון</string>
     <string name="tap_image_to_enlarge">לחץ על התמונה להגדלה</string>
-    
+
 
     <string name="error_title_required">אנא מלאי כותרת ומצרכים</string>-->
     <string name="success_save">המתכון נשמר</string>
@@ -72,6 +72,7 @@
     <string name="login_go_to_register">עדיין אין לך חשבון? להרשמה לחץ כאן</string>
     <string name="error_prefix">שגיאה: </string>
     <string name="error_unknown">אירעה שגיאה לא ידועה</string>
+    <string name="ErorLoad">שגיאה בטעינת הנתונים</string>
 
     <string name="register_title">יצירת חשבון</string>
     <string name="register_name_hint">שם מלא</string>
@@ -87,5 +88,7 @@
     <string name="tvNoRecipes">אין עדיין מתכונים, הקלד + להוספה</string>
     <string name="btnModeText">הקלדה ידנית</string>
     <string name="btnModeImage">תמונת מתכון</string>
+
+    <string name="translation">מתרגם...</string>
 
 </resources>

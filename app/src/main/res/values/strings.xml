@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">My Recipe Book</string>
+    <string name="app_name" translatable="false">HomeChef</string>
 
     <string name="add_recipe_header" translatable="false">Add New Recipe</string>
     <string name="hint_recipe_name" translatable="false">Recipe Name</string>
@@ -72,6 +72,8 @@
     <string name="login_go_to_register">Don\'t have an account? Register here</string>
     <string name="error_prefix">Error: </string>
     <string name="error_unknown">An unknown error occurred</string>
+    <string name="ErorLoad">Error loading data</string>
+
 
     <string name="register_title">Create Account</string>
     <string name="register_name_hint">Full Name</string>
@@ -88,5 +90,8 @@
     <string name="tvNoRecipes">No recipes found yet, enter + to add</string>
     <string name="btnModeText">Manual Typing</string>
     <string name="btnModeImage">Photo Recipe</string>
+
+    <string name="translation">Translate...</string>
+
 
 </resources>

@@ -34,7 +34,7 @@ public class Recipe {
     private String ingredients;
     private boolean isFavorite;
 
-    // שדות ה-API נשארים עם @Ignore כי הם לא נשמרים ב-DB ישירות
+    // API fields remain with @Ignore because they are not saved to the DB directly
     @Ignore @SerializedName("strIngredient1") private String strIngredient1;
     @Ignore @SerializedName("strIngredient2") private String strIngredient2;
     @Ignore @SerializedName("strIngredient3") private String strIngredient3;
@@ -46,7 +46,6 @@ public class Recipe {
     @Ignore @SerializedName("strIngredient9") private String strIngredient9;
     @Ignore @SerializedName("strIngredient10") private String strIngredient10;
 
-    // שדות הכמויות מה-API - גם הם ב-@Ignore כי לא שומרים אותם בנפרד ב-DB
     @Ignore @SerializedName("strMeasure1") private String strMeasure1;
     @Ignore @SerializedName("strMeasure2") private String strMeasure2;
     @Ignore @SerializedName("strMeasure3") private String strMeasure3;
@@ -70,7 +69,7 @@ public class Recipe {
         this.ingredients = ingredients;
         this.instructions = instructions;
         this.imagePath = imagePath;
-        this.userId = userId; // שמירת המשתמש שיצר את המתכון
+        this.userId = userId;
         this.isFavorite = false;
     }
 
@@ -79,7 +78,6 @@ public class Recipe {
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
 
-    // Getter ו-Setter עבור ה-userId החדש
     public String getUserId() { return userId; }
     public void setUserId(String userId) { this.userId = userId; }
 
@@ -88,7 +86,9 @@ public class Recipe {
 
     public String getTitle() { return title; }
     public void setTitle(String title) { this.title = title; }
+
     public String getCategory() { return category; }
+
     public void setCategory(String category) { this.category = category; }
     public String getIngredients() { return ingredients; }
     public void setIngredients(String ingredients) { this.ingredients = ingredients; }
@@ -105,13 +105,13 @@ public class Recipe {
         if (extendedIngredients == null) {
             extendedIngredients = new ArrayList<>();
 
-            // מערך של מרכיבים
+            // Array of components
             String[] apiIngredients = {
                     strIngredient1, strIngredient2, strIngredient3, strIngredient4, strIngredient5,
                     strIngredient6, strIngredient7, strIngredient8, strIngredient9, strIngredient10
             };
 
-            // מערך מקביל של כמויות
+            // Array of quantities
             String[] apiMeasures = {
                     strMeasure1, strMeasure2, strMeasure3, strMeasure4, strMeasure5,
                     strMeasure6, strMeasure7, strMeasure8, strMeasure9, strMeasure10
@@ -122,7 +122,7 @@ public class Recipe {
                 String measure = apiMeasures[i];
 
                 if (ing != null && !ing.trim().isEmpty()) {
-                    // שומרים את שניהם יחד באובייקט אחד
+                    // Save both together in one object
                     extendedIngredients.add(new ExtendedIngredient(ing, measure));
                 }
             }
@@ -143,7 +143,6 @@ public class Recipe {
             this.measure = measure;
         }
 
-        // פונקציה נוחה שתחזיר לנו טקסט מעוצב כמו "1kg Chicken"
         public String getFullText() {
             if (measure == null || measure.trim().isEmpty()) return name;
             return measure.trim() + " " + name;

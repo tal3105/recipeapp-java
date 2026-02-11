@@ -35,7 +35,6 @@ public class RegisterFragment extends Fragment {
                 MainActivity activity = (MainActivity) getActivity();
                 if (activity != null) {
                     activity.register(email, password, () -> {
-                        // לאחר הרשמה מוצלחת חוזרים למסך הלוגין
                         Navigation.findNavController(view).navigateUp();
                     });
                 }

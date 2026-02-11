@@ -83,7 +83,6 @@ public class HomeFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        // רענון רק אם אין חיפוש פעיל בכלל
         if (recipeViewModel.getLastSearchQuery().isEmpty()) {
             recipeViewModel.loadAllRecipes();
         }
@@ -96,7 +95,6 @@ public class HomeFragment extends Fragment {
             isRestoringSearch = true;
             binding.searchView.setQuery(lastQuery, false);
             binding.searchView.clearFocus();
-            // משחררים את הדגל אחרי זמן קצר כדי לאפשר חיפושים חדשים
             new Handler(Looper.getMainLooper()).postDelayed(() -> isRestoringSearch = false, 500);
         }
 
@@ -104,10 +102,9 @@ public class HomeFragment extends Fragment {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 if (!query.isEmpty() && !isRestoringSearch) {
-                    recipeViewModel.setLastSearchQuery(query); // שומרים את המקור (עברית/אנגלית)
+                    recipeViewModel.setLastSearchQuery(query);
 
                     TranslationHelper.translateToEnglish(query, translatedQuery -> {
-                        // החיפוש ב-API תמיד באנגלית
                         recipeViewModel.searchApi(translatedQuery);
                     });
                     binding.searchView.clearFocus();
@@ -117,14 +114,12 @@ public class HomeFragment extends Fragment {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                // אם אנחנו בתהליך שחזור מסך או שהטקסט לא באמת השתנה, לא עושים כלום
                 if (isRestoringSearch) return true;
 
                 if (newText.isEmpty()) {
                     recipeViewModel.setLastSearchQuery("");
                     recipeViewModel.loadAllRecipes();
                 } else {
-                    // לחיפוש מקומי תוך כדי הקלדה
                     TranslationHelper.translateToEnglish(newText, translatedQuery -> {
                         if (!isRestoringSearch) {
                             recipeViewModel.searchLocal(translatedQuery);
