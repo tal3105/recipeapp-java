@@ -40,10 +40,11 @@ public class AddRecipeFragment extends Fragment {
 
     private FragmentAddRecipeBinding binding;
     private RecipeViewModel recipeViewModel;
+
     private Bitmap capturedImage = null;
-    private int recipeId = -1;
+    private int recipeId = -1; // -1 means we are adding a new recipe
     private Recipe existingRecipe;
-    private String currentPhotoTarget = "DISH";
+    private String currentPhotoTarget = "DISH"; // initiate image path
 
     private final ActivityResultLauncher<Intent> cameraLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
@@ -67,7 +68,7 @@ public class AddRecipeFragment extends Fragment {
                         capturedImage = BitmapFactory.decodeStream(inputStream);
                         updateUIWithImage();
                     } catch (Exception e) {
-                        Toast.makeText(requireContext(), "Error loading image", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(requireContext(), getText(R.string.Error_loading_image), Toast.LENGTH_SHORT).show();
                     }
                 }
             }
@@ -83,6 +84,7 @@ public class AddRecipeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         setupSpinner();
         setupToggleLogic();
 
@@ -91,6 +93,7 @@ public class AddRecipeFragment extends Fragment {
             if (recipeId != -1) loadExistingRecipe();
         }
 
+        // Setting up click listeners for all buttons
         binding.btnCaptureImageMeal.setOnClickListener(v -> { currentPhotoTarget = "DISH"; showImageSourceDialog(); });
         binding.btnCaptureImage.setOnClickListener(v -> { currentPhotoTarget = "RECIPE"; showImageSourceDialog(); });
         binding.btnRemoveDishPhoto.setOnClickListener(v -> removeImage());
@@ -98,6 +101,7 @@ public class AddRecipeFragment extends Fragment {
         binding.btnSaveRecipe.setOnClickListener(v -> saveOrUpdateRecipe());
     }
 
+    // Getting recipe data from ViewModel if we are in edit mode
     private void loadExistingRecipe() {
         recipeViewModel.getRecipeById(recipeId).observe(getViewLifecycleOwner(), recipe -> {
             if (recipe != null) {
@@ -107,17 +111,20 @@ public class AddRecipeFragment extends Fragment {
         });
     }
 
+    // Filling the form with data from the recipe we are editing
     private void updateUIWithExistingData() {
         binding.etTitle.setText(existingRecipe.getTitle());
         binding.etIngredients.setText(existingRecipe.getIngredients());
         binding.etInstructions.setText(existingRecipe.getInstructions());
 
+        // Find and set the correct category in the spinner
         ArrayAdapter adapter = (ArrayAdapter) binding.spinnerCategory.getAdapter();
         if (adapter != null) {
             int position = adapter.getPosition(existingRecipe.getCategory());
             binding.spinnerCategory.setSelection(position);
         }
 
+        // Convert the saved string back to bitmap to show it on screen
         if (existingRecipe.getImagePath() != null && !existingRecipe.getImagePath().isEmpty()) {
             capturedImage = stringToBitmap(existingRecipe.getImagePath());
             updateUIWithImage();
@@ -126,10 +133,12 @@ public class AddRecipeFragment extends Fragment {
 
     private void saveOrUpdateRecipe() {
         String title = binding.etTitle.getText().toString().trim();
+
         if (title.isEmpty()) {
             Toast.makeText(requireContext(), R.string.error_title_required, Toast.LENGTH_SHORT).show();
             return;
         }
+
 
         int selectedPosition = binding.spinnerCategory.getSelectedItemPosition();
         if (selectedPosition == 0) {
@@ -140,6 +149,8 @@ public class AddRecipeFragment extends Fragment {
         String category = binding.spinnerCategory.getSelectedItem().toString();
         String ingredients = binding.etIngredients.getText().toString().trim();
         String instructions = binding.etInstructions.getText().toString().trim();
+
+        // Save the image as a string so it can go into the database
         String imageStr = (capturedImage != null) ? bitmapToString(capturedImage) : "";
 
         String currentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -168,15 +179,21 @@ public class AddRecipeFragment extends Fragment {
         binding.spinnerCategory.setAdapter(adapter);
     }
 
+    // ToggleButton to switch between text and image
     private void setupToggleLogic() {
-        ColorStateList selector = new ColorStateList(
-                new int[][]{new int[]{android.R.attr.state_checked}, new int[]{-android.R.attr.state_checked}},
-                new int[]{Color.parseColor("#8DC63F"), Color.TRANSPARENT}
-        );
-        binding.btnModeText.setBackgroundTintList(selector);
-        binding.btnModeImage.setBackgroundTintList(selector);
+        int myGreen = ContextCompat.getColor(requireContext(), R.color.green);
+        int transparent = Color.TRANSPARENT;
+
+        // Default : Text is visible
+        binding.containerText.setVisibility(View.VISIBLE);
+        binding.containerImage.setVisibility(View.GONE);
+
+        updateToggleColors(R.id.btnModeText, myGreen, transparent);
+
         binding.toggleGroup.addOnButtonCheckedListener((group, checkedId, isChecked) -> {
             if (isChecked) {
+                updateToggleColors(checkedId, myGreen, transparent);
+
                 if (checkedId == R.id.btnModeText) {
                     binding.containerText.setVisibility(View.VISIBLE);
                     binding.containerImage.setVisibility(View.GONE);
@@ -186,6 +203,16 @@ public class AddRecipeFragment extends Fragment {
                 }
             }
         });
+    }
+
+    private void updateToggleColors(int checkedId, int green, int transparent) {
+        if (checkedId == R.id.btnModeText) {
+            binding.btnModeText.setBackgroundTintList(ColorStateList.valueOf(green));
+            binding.btnModeImage.setBackgroundTintList(ColorStateList.valueOf(transparent));
+        } else {
+            binding.btnModeText.setBackgroundTintList(ColorStateList.valueOf(transparent));
+            binding.btnModeImage.setBackgroundTintList(ColorStateList.valueOf(green));
+        }
     }
 
     private void updateUIWithImage() {
@@ -208,12 +235,14 @@ public class AddRecipeFragment extends Fragment {
         binding.btnRemoveRecipePhoto.setVisibility(View.GONE);
     }
 
+    // Convert bitmap to Base64 string for database
     private String bitmapToString(Bitmap bitmap) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 70, baos);
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 70, baos); // Compressing to 70% to save space
         return Base64.encodeToString(baos.toByteArray(), Base64.DEFAULT);
     }
 
+    // Convert Base64 string from database back to Bitmap
     private Bitmap stringToBitmap(String encodedString) {
         try {
             byte[] encodeByte = Base64.decode(encodedString, Base64.DEFAULT);
@@ -221,18 +250,26 @@ public class AddRecipeFragment extends Fragment {
         } catch (Exception e) { return null; }
     }
 
+    // Dialog to let user choose between Camera and Gallery
     private void showImageSourceDialog() {
-        String[] options = {"Camera", "Gallery"};
+        String select_Image_Source = getText(R.string.Select_Image_Source).toString();
+        String camera = getText(R.string.camera).toString();
+        String gallery = getText(R.string.gallery).toString();
+
+        String[] options = {camera, gallery};
         new AlertDialog.Builder(requireContext())
-                .setTitle("Select Image Source")
+                .setTitle(select_Image_Source)
                 .setItems(options, (dialog, which) -> {
                     if (which == 0) {
+                        // Check for camera permission first
                         if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
                             cameraLauncher.launch(new Intent(MediaStore.ACTION_IMAGE_CAPTURE));
                         } else {
                             requestPermissionLauncher.launch(Manifest.permission.CAMERA);
                         }
-                    } else { galleryLauncher.launch("image/*"); }
+                    } else {
+                        galleryLauncher.launch("image/*");
+                    }
                 }).show();
     }
 

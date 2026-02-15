@@ -13,7 +13,9 @@ import java.util.List;
 
 public class RecipeViewModel extends AndroidViewModel {
     private final RecipeRepository repository;
+
     private final MutableLiveData<List<Recipe>> currentRecipes = new MutableLiveData<>();
+
     private String lastSearchQuery = "";
 
     public RecipeViewModel(@NonNull Application application) {
@@ -37,41 +39,49 @@ public class RecipeViewModel extends AndroidViewModel {
     public LiveData<List<Recipe>> getCurrentRecipes() {
         return currentRecipes;
     }
-
-
     public void loadAllRecipes() {
-        repository.getAllRecipes().observeForever(currentRecipes::setValue);
+        repository.getAllRecipes().observeForever(recipes -> {
+            currentRecipes.setValue(recipes);
+        });
     }
 
     public void searchLocal(String query) {
-        repository.searchRecipesLocal(query).observeForever(currentRecipes::setValue);
+        repository.searchRecipesLocal(query).observeForever(recipes -> {
+            currentRecipes.setValue(recipes);
+        });
     }
 
     public void searchApi(String query) {
         repository.searchRecipesApi(query).observeForever(recipes -> {
             if (recipes != null) {
+                // Update our main LiveData so the Home screen refreshes
                 currentRecipes.setValue(recipes);
             }
         });
     }
 
+    // Filter recipes based on the selected Chip
     public void filterByCategory(String category) {
         if (category.equals("All") || category.isEmpty()) {
             loadAllRecipes();
         } else {
-            repository.getRecipesByCategory(category).observeForever(currentRecipes::setValue);
+            repository.getRecipesByCategory(category).observeForever(recipes -> {
+                currentRecipes.setValue(recipes);
+            });
         }
     }
 
     public void filterByFavorites() {
-        repository.getFavoriteRecipes().observeForever(currentRecipes::setValue);
+        repository.getFavoriteRecipes().observeForever(recipes -> {
+            currentRecipes.setValue(recipes);
+        });
     }
 
+    // flip the favorite status and update the database
     public void toggleFavorite(Recipe recipe) {
         recipe.setFavorite(!recipe.isFavorite());
         repository.upsert(recipe);
     }
-
 
     public LiveData<List<String>> getAllCategories() {
         return repository.getAllCategories();

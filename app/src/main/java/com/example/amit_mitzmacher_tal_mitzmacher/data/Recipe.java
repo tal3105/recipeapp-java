@@ -12,8 +12,7 @@ public class Recipe {
     @PrimaryKey(autoGenerate = true)
     private int id;
 
-    // --- השדה החדש להפרדת משתמשים ---
-    private String userId; // ה-UID של המשתמש מ-Firebase
+    private String userId;
 
     @SerializedName("idMeal")
     private String apiId;

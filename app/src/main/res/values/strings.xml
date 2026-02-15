@@ -9,6 +9,7 @@
     <string name="btn_capture" translatable="false">Capture Recipe Image</string>
     <string name="btn_save" translatable="false">Save Recipe</string>
     <string name="tap_image_to_enlarge" translatable="false">TAP IMAGE TO ENLARGE</string>
+    <string name="Error_loading_image">Error loading image</string>
 
 
     <string name="error_title_required" translatable="false">Please fill in title and ingredients</string>-->
@@ -92,6 +93,10 @@
     <string name="btnModeImage">Photo Recipe</string>
 
     <string name="translation">Translate...</string>
+
+    <string name="Select_Image_Source">Select Image Source</string>
+
+
 
 
 </resources>

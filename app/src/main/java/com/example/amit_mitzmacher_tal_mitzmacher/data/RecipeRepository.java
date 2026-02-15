@@ -4,7 +4,7 @@ import android.app.Application;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import com.example.amit_mitzmacher_tal_mitzmacher.data.network.RecipeApiResponse;
-import com.example.amit_mitzmacher_tal_mitzmacher.data.network.RetrofitClient;
+import com.example.amit_mitzmacher_tal_mitzmacher.data.network.RecipeService;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -15,15 +15,27 @@ import java.util.concurrent.Executors;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RecipeRepository {
     private final RecipeDao recipeDao;
     private final ExecutorService executorService;
+    private final RecipeService recipeService;
+    private final String BASE = "https://www.themealdb.com/api/json/v1/1/";
+
 
     public RecipeRepository(Application application) {
         AppDatabase db = AppDatabase.getInstance(application);
         recipeDao = db.recipeDao();
         executorService = Executors.newFixedThreadPool(4);
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(BASE)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        this.recipeService = retrofit.create(RecipeService.class);
     }
 
     private String getCurrentUserId() {
@@ -93,7 +105,7 @@ public class RecipeRepository {
 
     public LiveData<List<Recipe>> searchRecipesApi(String query) {
         MutableLiveData<List<Recipe>> apiResults = new MutableLiveData<>();
-        RetrofitClient.getRecipeService().searchRecipes(query)
+        recipeService.searchRecipes(query)
                 .enqueue(new Callback<RecipeApiResponse>() {
                     @Override
                     public void onResponse(Call<RecipeApiResponse> call, Response<RecipeApiResponse> response) {
@@ -113,7 +125,7 @@ public class RecipeRepository {
 
     public LiveData<Recipe> getRecipeDetailsFromApi(String apiId) {
         MutableLiveData<Recipe> recipeData = new MutableLiveData<>();
-        RetrofitClient.getRecipeService().getRecipeDetails(apiId).enqueue(new Callback<RecipeApiResponse>() {
+        recipeService.getRecipeDetails(apiId).enqueue(new Callback<RecipeApiResponse>() {
             @Override
             public void onResponse(Call<RecipeApiResponse> call, Response<RecipeApiResponse> response) {
                 if (response.isSuccessful() && response.body() != null && response.body().getRecipes() != null) {

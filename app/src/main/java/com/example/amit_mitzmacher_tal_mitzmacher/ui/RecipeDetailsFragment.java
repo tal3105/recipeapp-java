@@ -202,6 +202,7 @@ public class RecipeDetailsFragment extends Fragment {
 
         dialog.show();
         dialog.setContentView(iv);
+        // Click to close the image
         iv.setOnClickListener(v -> dialog.dismiss());
     }
 

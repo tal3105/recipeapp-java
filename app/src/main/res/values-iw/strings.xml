@@ -18,6 +18,8 @@
     <string name="fill_fields_error">אנא מלאי את הכותרת והמצרכים</string>
     <string name="recipe_saved_success">המתכון נשמר בהצלחה</string>
     <string name="updated">המתכון עודכן</string>
+    <string name="Error_loading_image">שגיאה בטעינת התמונה</string>
+
 
     <string name="searchView">חיפוש לפי מצרכים</string>
 
@@ -90,5 +92,8 @@
     <string name="btnModeImage">תמונת מתכון</string>
 
     <string name="translation">מתרגם...</string>
+
+    <string name="Select_Image_Source">בחר מקור תמונה</string>
+
 
 </resources>

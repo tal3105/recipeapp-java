@@ -14,6 +14,7 @@ import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
@@ -198,32 +199,61 @@ public class HomeFragment extends Fragment {
 
     private void addChipToGroup(String displayName, String originalName, boolean isChecked) {
         Chip chip = new Chip(requireContext(), null, com.google.android.material.R.attr.chipStyle);
+
         chip.setText(displayName);
         chip.setTag(originalName);
         chip.setCheckable(true);
         chip.setChecked(isChecked);
 
-        int greenColor = Color.parseColor("#8DC63F");
-        chip.setChipStrokeColor(ColorStateList.valueOf(greenColor));
+        int myGreen = ContextCompat.getColor(requireContext(), R.color.green);
+        int myWhite = ContextCompat.getColor(requireContext(), R.color.white);
+
+        // green border for chips
+        chip.setChipStrokeColor(ColorStateList.valueOf(myGreen));
         chip.setChipStrokeWidth(3f);
-        int[][] states = new int[][]{ new int[]{android.R.attr.state_checked}, new int[]{-android.R.attr.state_checked} };
-        chip.setChipBackgroundColor(new ColorStateList(states, new int[]{greenColor, Color.WHITE}));
-        chip.setTextColor(new ColorStateList(states, new int[]{Color.WHITE, greenColor}));
+
+        // initial colors based on if the chip is checked or not
+        updateChipAppearance(chip, isChecked, myGreen, myWhite);
 
         chip.setOnCheckedChangeListener((v, checked) -> {
+            updateChipAppearance(chip, checked, myGreen, myWhite);
+
+            // Filter recipes used help fun
             if (checked) {
-                if (originalName.equals("All")) {
-                    recipeViewModel.setLastSearchQuery("");
-                    recipeViewModel.loadAllRecipes();
-                } else if (originalName.equals("Favorites ⭐")) {
-                    recipeViewModel.filterByFavorites();
-                } else {
-                    recipeViewModel.filterByCategory(originalName);
-                }
-                if (!originalName.equals("All")) binding.searchView.setQuery("", false);
+                handleCategorySelection(originalName);
             }
         });
+
         binding.chipGroupCategories.addView(chip);
+    }
+
+    // Helper function to handle color
+    private void updateChipAppearance(Chip chip, boolean isChecked, int green, int white) {
+        if (isChecked) {
+            // Selected state: green background with white text
+            chip.setChipBackgroundColor(ColorStateList.valueOf(green));
+            chip.setTextColor(white);
+        } else {
+            // Unselected state: white background with green text
+            chip.setChipBackgroundColor(ColorStateList.valueOf(white));
+            chip.setTextColor(green);
+        }
+    }
+
+    // Handling the different filter options from the ViewModel
+    private void handleCategorySelection(String originalName) {
+        if (originalName.equals("All")) {
+            recipeViewModel.setLastSearchQuery("");
+            recipeViewModel.loadAllRecipes();
+        } else if (originalName.equals("Favorites ⭐")) {
+            recipeViewModel.filterByFavorites();
+        } else {
+            recipeViewModel.filterByCategory(originalName);
+        }
+
+        if (!originalName.equals("All")) {
+            binding.searchView.setQuery("", false);
+        }
     }
 
     @Override
