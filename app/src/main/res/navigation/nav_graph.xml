@@ -19,6 +19,7 @@
         <action
             android:id="@+id/action_homeFragment_to_logInFragment"
             app:destination="@id/logInFragment"
+            app:popUpTo="@id/logInFragment"
             app:popUpToInclusive="false" />
 
     </fragment>
@@ -40,9 +41,7 @@
         android:label="LogInFragment" >
         <action
             android:id="@+id/action_logInFragment_to_homeFragment"
-            app:destination="@id/homeFragment"
-            app:popUpTo="@id/logInFragment"
-            app:popUpToInclusive="true"/>
+            app:destination="@id/homeFragment" />
 
         <action
             android:id="@+id/action_logInFragment_to_registerFragment"
