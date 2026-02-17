@@ -117,6 +117,7 @@ public class AddRecipeFragment extends Fragment {
         binding.etIngredients.setText(existingRecipe.getIngredients());
         binding.etInstructions.setText(existingRecipe.getInstructions());
 
+
         // Find and set the correct category in the spinner
         ArrayAdapter adapter = (ArrayAdapter) binding.spinnerCategory.getAdapter();
         if (adapter != null) {

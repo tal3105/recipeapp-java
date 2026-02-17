@@ -153,36 +153,16 @@ public class HomeFragment extends Fragment {
                         getString(R.string.removed_from_favorites);
                 Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
 
-                if (recipe.getApiId() != null && !recipe.getApiId().isEmpty()) {
-                    new Handler(Looper.getMainLooper()).postDelayed(() -> forceSelectAllChip(), 300);
-                }
             }
         });
         binding.rvRecipes.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.rvRecipes.setAdapter(adapter);
     }
 
-    private void forceSelectAllChip() {
-        binding.searchView.setQuery("", false);
-        binding.searchView.clearFocus();
-        recipeViewModel.setLastSearchQuery("");
-
-        for (int i = 0; i < binding.chipGroupCategories.getChildCount(); i++) {
-            View child = binding.chipGroupCategories.getChildAt(i);
-            if (child instanceof Chip) {
-                Chip chip = (Chip) child;
-                if (chip.getTag() != null && chip.getTag().toString().equalsIgnoreCase("All")) {
-                    chip.setChecked(true);
-                    break;
-                }
-            }
-        }
-    }
-
     private void setupCategoryFilters() {
         recipeViewModel.getAllCategories().observe(getViewLifecycleOwner(), categories -> {
             if (categories != null) {
-                binding.chipGroupCategories.removeAllViews();
+                binding.chipGroupCategories.removeAllViews(); //prevent duplicate
                 addChipToGroup(getString(R.string.chipAll), "All", recipeViewModel.getLastSearchQuery().isEmpty());
                 addChipToGroup(getString(R.string.chipFavorite), "Favorites ⭐", false);
 

@@ -12,7 +12,7 @@ import java.util.concurrent.Executors;
 public abstract class AppDatabase extends RoomDatabase {
 
     public abstract RecipeDao recipeDao();
-    private static volatile AppDatabase instance;
+    private static volatile AppDatabase instance; //see the last
 
     private static final int NUMBER_OF_THREADS = 4;
     public static final ExecutorService databaseWriteExecutor =

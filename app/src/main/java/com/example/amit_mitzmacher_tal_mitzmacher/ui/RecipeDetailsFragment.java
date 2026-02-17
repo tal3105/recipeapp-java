@@ -82,6 +82,15 @@ public class RecipeDetailsFragment extends Fragment {
     }
 
     private void displayRecipe(Recipe recipe, boolean isFromApi, Recipe apiFallback) {
+
+        boolean isWebRecipe = isFromApi || (recipe.getApiId() != null && !recipe.getApiId().isEmpty());
+
+        if (isWebRecipe) {
+            binding.wrapperEdit.setVisibility(View.GONE);
+        } else {
+            binding.wrapperEdit.setVisibility(View.VISIBLE);
+        }
+
         TranslationHelper.translate(recipe.getTitle(), translated -> {
             if (binding != null) binding.tvDetailsTitle.setText(translated);
         });
@@ -109,7 +118,6 @@ public class RecipeDetailsFragment extends Fragment {
 
         handleImageDisplay(recipe, isFromApi);
 
-        binding.wrapperEdit.setVisibility(isFromApi ? View.GONE : View.VISIBLE);
         binding.wrapperDelete.setVisibility(recipe.getId() > 0 ? View.VISIBLE : View.GONE);
     }
 

@@ -11,5 +11,4 @@ import retrofit2.http.Query;
 public interface RecipeService {
     @GET("search.php") Call<RecipeApiResponse> searchRecipes(@Query("s") String query);
     @GET("lookup.php") Call<RecipeApiResponse> getRecipeDetails(@Query("i") String id);
-    @GET("random.php") Call<RecipeApiResponse> getRandomRecipe();
 }

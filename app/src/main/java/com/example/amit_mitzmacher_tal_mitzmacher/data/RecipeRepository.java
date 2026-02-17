@@ -130,6 +130,8 @@ public class RecipeRepository {
             public void onResponse(Call<RecipeApiResponse> call, Response<RecipeApiResponse> response) {
                 if (response.isSuccessful() && response.body() != null && response.body().getRecipes() != null) {
                     recipeData.setValue(response.body().getRecipes().get(0));
+                } else {
+                    recipeData.setValue(null);
                 }
             }
             @Override
